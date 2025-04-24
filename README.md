@@ -2,7 +2,7 @@
 
 ## 工程结构
 
-demo-root ------xstream ？
+maven-demo ------xstream ？
 
   └── demo-app
 
@@ -14,8 +14,8 @@ demo-root ------xstream ？
 demo-app依赖demo-sdk，所以demo-sdk会最先打包，demo-app会最后打包
 
 ## 子工程demo-sdk测试
-1、当主pom demo-root的pom在dependencyManagement定义xstream为1.4.9危险版，子pom demo-sdk引用xstream但不定义版本，此时会使用父工程中的
-demo-root
+1、当主pom maven-demo的pom在dependencyManagement定义xstream为1.4.9危险版，子pom demo-sdk引用xstream但不定义版本，此时会使用父工程中的
+maven-demo
 ```
     <dependencyManagement>
         <dependencies>
@@ -43,7 +43,7 @@ demo-sdk
 [INFO]    +- xmlpull:xmlpull:jar:1.1.3.1:compile
 [INFO]    \- xpp3:xpp3_min:jar:1.1.4c:compile
 ```
-2、当主pom demo-root的pom在dependencyManagement定义xstream为1.4.9危险版，子pom demo-sdk引用xstream定义1.4.21版本。
+2、当主pom maven-demo的pom在dependencyManagement定义xstream为1.4.9危险版，子pom demo-sdk引用xstream定义1.4.21版本。
 只需要将上述demo-sdk改为
 ```
     <dependencies>
@@ -63,7 +63,7 @@ demo-sdk
 ```
 3、
 ## 整个项目测试，即demo-app项目测试，因为根据依赖关系最终打包的是demo-app项目
-1.demo-app只引用不进行dependencyManagement和dependency去定义xstream版本，demo-sdk显引用xstream 1.4.21，demo-root在dependencyManagement定义xstream为1.4.9
+1.demo-app只引用不进行dependencyManagement和dependency去定义xstream版本，demo-sdk显引用xstream 1.4.21，maven-demo在dependencyManagement定义xstream为1.4.9
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -96,7 +96,7 @@ demo-sdk
         </dependency>
     </dependencies>
 ```
-demo-root
+maven-demo
 ```
     <dependencyManagement>
         <dependencies>
@@ -108,7 +108,7 @@ demo-root
         </dependencies>
     </dependencyManagement>
 ```
-在demo-root目录下执行mvn dependency:tree，显示xstream为1.4.9，虽然demo-sdk传递的是1.4.21版本，但是demo-app为定义xstream版本，同时子父级pom继承大于依赖传递，所以demo-app用的是demo-root在dependencyManagement定义的1.4.9版本
+在maven-demo目录下执行mvn dependency:tree，显示xstream为1.4.9，虽然demo-sdk传递的是1.4.21版本，但是demo-app为定义xstream版本，同时子父级pom继承大于依赖传递，所以demo-app用的是maven-demo在dependencyManagement定义的1.4.9版本
 ```
 [INFO] com.example:demo-app:jar:1.0-SNAPSHOT
 [INFO] \- com.example:demo-sdk:jar:1.0-SNAPSHOT:compile
@@ -116,9 +116,9 @@ demo-root
 [INFO]       +- xmlpull:xmlpull:jar:1.1.3.1:compile
 [INFO]       \- xpp3:xpp3_min:jar:1.1.4c:compile
 ```
-2.demo-root和demo-app只引用不进行dependencyManagement和dependency去定义xstream版本，demo-sdk显引用xstream 1.4.21
-只需要将上面的<dependencyManagement>相关代码注释掉
-在demo-root目录下执行mvn dependency:tree，显示xstream为1.4.21，直接依赖传递
+2.maven-demo和demo-app只引用不进行dependencyManagement和dependency去定义xstream版本，demo-sdk显引用xstream 1.4.21
+只需要将上面的dependencyManagement相关代码注释掉
+在maven-demo目录下执行mvn dependency:tree，显示xstream为1.4.21，直接依赖传递
 ```
 [INFO] com.example:demo-app:jar:1.0-SNAPSHOT
 [INFO] \- com.example:demo-sdk:jar:1.0-SNAPSHOT:compile
@@ -128,7 +128,7 @@ demo-root
 ```
 ## 上述修复方式
 1、父工程的dependencyManagement直接定义安全版本
-demo-root
+maven-demo
 ```
     <dependencyManagement>
         <dependencies>
@@ -164,7 +164,7 @@ demo-app
         </dependency>
     </dependencies>
 ```
-上述3种情况在demo-root目录下执行mvn dependency:tree，显示xstream为1.4.21
+上述3种情况在maven-demo目录下执行mvn dependency:tree，显示xstream为1.4.21
 ```
 [INFO] com.example:demo-app:jar:1.0-SNAPSHOT
 [INFO] \- com.example:demo-sdk:jar:1.0-SNAPSHOT:compile
