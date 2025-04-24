@@ -61,7 +61,7 @@ demo-sdk
 [INFO]    \- io.github.x-stream:mxparser:jar:1.2.2:compile
 [INFO]       \- xmlpull:xmlpull:jar:1.1.3.1:compile
 ```
-3、
+
 ## 整个项目测试，即demo-app项目测试，因为根据依赖关系最终打包的是demo-app项目
 1.demo-app只引用不进行dependencyManagement和dependency去定义xstream版本，demo-sdk显引用xstream 1.4.21，maven-demo在dependencyManagement定义xstream为1.4.9
 ```
