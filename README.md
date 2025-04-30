@@ -183,3 +183,5 @@ demo-app
 
 ## 参考
 https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html?utm_source=chatgpt.com
+https://mp.weixin.qq.com/s/flniMiP-eu3JSBnswfd_Ew
+https://mp.weixin.qq.com/s/xsJkB0onUkakrVH0wejcIg
