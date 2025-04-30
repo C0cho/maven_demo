@@ -180,3 +180,6 @@ demo-app
 2.子pom如需设置组件版本，必须设为安全版本。
 
 3. 依赖情况下最终SpringBoot打包工程也需要一份安全的dependencyManagent管理版本来限制最终的间接依赖，防止其引入的危险组件同时父工程pom中的dependencyManagent遗漏版本定义或定义了危险版本的情况。
+
+## 参考
+https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html?utm_source=chatgpt.com
